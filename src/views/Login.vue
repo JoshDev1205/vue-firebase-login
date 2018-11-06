@@ -3,10 +3,10 @@
         <h3 v-show="loading">Cargando</h3>
         <div v-show="!loading">
           <h3>Login</h3>
-          <input type="email" v-model="email" placeholder="email"><br>
-          <input type="password" v-model="password" placeholder="password"><br>
+          <!-- <input type="email" v-model="email" placeholder="email"><br> -->
+          <!-- <input type="password" v-model="password" placeholder="password"><br> -->
           <button @click="signin">Conectar</button>
-          <p>¿No tienes cuenta? <router-link to="/signup">create una</router-link>.</p>
+          <!-- <p>¿No tienes cuenta? <router-link to="/signup">create una</router-link>.</p> -->
         </div>
     </div>
 </template>
@@ -22,18 +22,15 @@ export default {
       email: "",
       password: "",
       loading: false,
-      user: {}
     };
   },
   methods: {
     signin() {
       this.loading = true;
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+      let provider = new firebase.auth.FacebookAuthProvider();
+      firebase.auth().signInWithPopup(provider)
         .then(
           user => {
-            this.user = user;
             this.loading = false;
             this.$router.replace("home");
           },

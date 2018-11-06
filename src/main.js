@@ -7,12 +7,14 @@ let app;
 import firebaseConfig from "./config/firebase";
 
 firebase.initializeApp(firebaseConfig);
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged(user => {
+  // eslint-disable-next-line
+  console.log(user);
   if (!app) {
     new Vue({
       router,
       render: h => h(App)
     }).$mount("#app");
   }
-})
+});
 Vue.config.productionTip = false;
