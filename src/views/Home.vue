@@ -7,7 +7,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-
+import EventBus from "@/plugins/event-bus";
 export default {
   name: "home",
   components: {

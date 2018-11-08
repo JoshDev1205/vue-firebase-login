@@ -2,11 +2,14 @@
   <div class="hello">
     Hola
     <button @click="logout">Salir</button>
+    <button @click="guardar">guardar</button>
   </div>
 </template>
 
 <script>
 import firebase from "firebase/app";
+import EventBus from "@/plugins/event-bus";
+
 export default {
   name: "HelloWorld",
   props: {
@@ -21,6 +24,12 @@ export default {
         .then(() => {
           this.$router.replace("login");
         });
+    },
+
+    guardar() {
+      EventBus.$on("userActive", data => {
+        console.log(data)
+      });
     }
   }
 };

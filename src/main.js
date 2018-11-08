@@ -6,10 +6,12 @@ import firebase from "firebase/app";
 let app;
 import firebaseConfig from "./config/firebase";
 
+import EventBus from "./plugins/event-bus";
+
 firebase.initializeApp(firebaseConfig);
 firebase.auth().onAuthStateChanged(user => {
   // eslint-disable-next-line
-  console.log(user);
+  EventBus.$emit("userActived", user);
   if (!app) {
     new Vue({
       router,
