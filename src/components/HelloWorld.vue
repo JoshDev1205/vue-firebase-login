@@ -8,14 +8,17 @@
 
 <script>
 import firebase from "firebase/app";
-import EventBus from "@/plugins/event-bus";
 
 export default {
   name: "HelloWorld",
   props: {
     msg: String
   },
-
+  data() {
+    return {
+      currentUser: null
+    }
+  },
   methods: {
     logout() {
       firebase
@@ -27,9 +30,8 @@ export default {
     },
 
     guardar() {
-      EventBus.$on("userActive", data => {
-        console.log(data)
-      });
+      this.currentUser = firebase.auth().currentUser
+      console.log({usuario: this.currentUser})
     }
   }
 };
